@@ -45,20 +45,16 @@ public class CreateGame {
         gameBoard.add("South", gamePanel);
         gameBoard.add("Center", gameButtons);
         gameButtons.setLayout(new GridLayout(4, 4));
-
         addButtons();
-        b16.setOpaque(false);
-        b16.setContentAreaFilled(false);
-        b16.setBorderPainted(false);
+
+
 
         //Handlers
         newGame.addActionListener(l -> {
-
-            gameButtons.removeAll();
             addButtons();
             gameButtons.revalidate();
-
         });
+
         quitGame.addActionListener(l -> {
             JOptionPane.showMessageDialog(null, "Spelet avslutas");
             System.exit(0);
@@ -70,13 +66,23 @@ public class CreateGame {
         gh.randomGame(buttonList);
         //Lägger till alla knappar
         for(JButton j: buttonList) {
+            j.setOpaque(true);
+            j.setContentAreaFilled(true);
+            j.setBorderPainted(true);
+            gamePanel.add(newGame);gamePanel.add(quitGame);
+            if(j.getText().equals("")) {
+                j.setText(buttonList.get(15).getText());
+            }
+            if(j == buttonList.get(15)) {
+                j.setText("");
+                j.setOpaque(false);
+                j.setContentAreaFilled(false);
+                j.setBorderPainted(false);
+            }
+
             j.addActionListener(new myButtonListern());
             gameButtons.add(j);
         }
-
-        //Osynlig knapp som ej kan klickas.
-   //     gameButtons.add(b16);
-        gamePanel.add(newGame);gamePanel.add(quitGame);
 
     }
 
@@ -87,24 +93,24 @@ public class CreateGame {
         public void actionPerformed(ActionEvent e) {
             JButton button = (JButton) e.getSource();
 
-            int indexOfB16 = 0, clickedIndex = 0;
-            for(int i = 1; i < 16; i++) {
+            int transp = Integer.MIN_VALUE, clicked = Integer.MIN_VALUE;
+            for(int i = 0; i < buttonList.size(); i++) {
                 if (buttonList.get(i).getText().equals(button.getText())) {
-                    clickedIndex = i;
+                    clicked = i;
                 }
                 else if (buttonList.get(i).getText().equals("")){
-                    indexOfB16 = i;
+                    transp = i;
                 }
             }
 
-            if(indexOfB16 == clickedIndex - 1 || indexOfB16 == clickedIndex + 1
-            || indexOfB16 == clickedIndex + 4 || indexOfB16 == clickedIndex - 4) {
-                b16 = buttonList.get(indexOfB16);
-                b16.setText(button.getText());
+            if(transp == clicked - 1 || transp == clicked + 1
+            || transp == clicked + 4 || transp == clicked - 4) {
+                JButton transpButton = buttonList.get(transp);
+                transpButton.setText(button.getText());
                 button.setText("");
-                b16.setOpaque(true);
-                b16.setContentAreaFilled(true);
-                b16.setBorderPainted(true);
+                transpButton.setOpaque(true);
+                transpButton.setContentAreaFilled(true);
+                transpButton.setBorderPainted(true);
                 button.setOpaque(false);
                 button.setContentAreaFilled(false);
                 button.setBorderPainted(false);
