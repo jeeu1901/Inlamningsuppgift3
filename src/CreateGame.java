@@ -1,6 +1,9 @@
 import javax.swing.*;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -26,25 +29,47 @@ public class CreateGame {
     JButton b13 = new JButton("13");
     JButton b14 = new JButton("14");
     JButton b15 = new JButton("15");
+    List<JButton> buttonList = Arrays.asList(b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15);
+    List<JButton> randomList;
+    GameHandlers gh = new GameHandlers();
 
     CreateGame() {
+        //Design
         gameBoard.setLayout(new BorderLayout());
         gameBoard.setSize(1000, 1000);
         gameBoard.setVisible(true);
         gameBoard.setLocationRelativeTo(null);
         gameBoard.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        gameBoard.add("South", gamePanel);gameBoard.add("Center", gameButtons);
-
+        gameBoard.add("South", gamePanel);
+        gameBoard.add("Center", gameButtons);
         gameButtons.setLayout(new GridLayout(4, 4));
 
-        gameButtons.add(b1);gameButtons.add(b2);gameButtons.add(b3);gameButtons.add(b4);gameButtons.add(b5);gameButtons.add(b6);
-        gameButtons.add(b7);gameButtons.add(b8);gameButtons.add(b9);gameButtons.add(b10);gameButtons.add(b11);gameButtons.add(b12);
-        gameButtons.add(b13);gameButtons.add(b14);gameButtons.add(b15);
+        addButtons();
 
-        gamePanel.add(newGame);gamePanel.add(quitGame);
+        //Handlers
+        newGame.addActionListener(l -> {
+
+            gameButtons.removeAll();
+            addButtons();
+            gameButtons.revalidate();
+
+        });
+        quitGame.addActionListener(l -> {
+            JOptionPane.showMessageDialog(null, "Spelet avslutas");
+            System.exit(0);
+        });
+
     }
 
+    public void addButtons() {
+        gh.randomGame(buttonList);
+        for(JButton j: buttonList) {
+            gameButtons.add(j);
+        }
+
+        gamePanel.add(newGame);gamePanel.add(quitGame);
+
+    }
 
 
 }
