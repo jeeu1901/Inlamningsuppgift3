@@ -28,6 +28,7 @@ public class CreateGame {
     JButton b13 = new JButton("13");
     JButton b14 = new JButton("14");
     JButton b15 = new JButton("15");
+    JButton b16 = new JButton("");
     List<JButton> buttonList = Arrays.asList(b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15);
     GameHandlers gh = new GameHandlers();
 
@@ -35,6 +36,7 @@ public class CreateGame {
         //Design
         gameBoard.setLayout(new BorderLayout());
         gameBoard.setSize(1000, 1000);
+        gameBoard.setTitle("15-spel");
         gameBoard.setVisible(true);
         gameBoard.setLocationRelativeTo(null);
         gameBoard.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -57,6 +59,7 @@ public class CreateGame {
             System.exit(0);
         });
 
+
     }
 
     public void addButtons() {
@@ -64,7 +67,10 @@ public class CreateGame {
         for(JButton j: buttonList) {
             gameButtons.add(j);
         }
-
+        gameButtons.add(b16);
+        b16.setOpaque(false);
+        b16.setContentAreaFilled(false);
+        b16.setBorderPainted(false);
         gamePanel.add(newGame);gamePanel.add(quitGame);
 
     }
