@@ -29,7 +29,6 @@ public class CreateGame {
     JButton b14 = new JButton("14");
     JButton b15 = new JButton("15");
     List<JButton> buttonList = Arrays.asList(b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15);
-    List<JButton> randomList;
     GameHandlers gh = new GameHandlers();
 
     CreateGame() {
