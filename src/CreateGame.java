@@ -1,6 +1,8 @@
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class CreateGame {
     JButton b14 = new JButton("14");
     JButton b15 = new JButton("15");
     JButton b16 = new JButton("");
-    List<JButton> buttonList = Arrays.asList(b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15);
+    List<JButton> buttonList = Arrays.asList(b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16);
     GameHandlers gh = new GameHandlers();
 
     CreateGame() {
@@ -61,21 +63,53 @@ public class CreateGame {
 
 
     }
-
     public void addButtons() {
         gh.randomGame(buttonList);
         //Lägger till alla knappar
         for(JButton j: buttonList) {
+            j.addActionListener(new myButtonListern());
             gameButtons.add(j);
         }
 
         //Osynlig knapp som ej kan klickas.
-        gameButtons.add(b16);
+   //     gameButtons.add(b16);
         b16.setOpaque(false);
         b16.setContentAreaFilled(false);
         b16.setBorderPainted(false);
         gamePanel.add(newGame);gamePanel.add(quitGame);
 
+    }
+
+     class myButtonListern implements ActionListener {
+
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JButton button = (JButton) e.getSource();
+
+            int indexOfB16 = 0, clickedIndex = 0;
+            for(int i = 1; i < 16; i++) {
+                if (buttonList.get(i).getText().equals(button.getText())) {
+                    clickedIndex = i;
+                }
+                else if (buttonList.get(i).getText().equals("")){
+                    indexOfB16 = i;
+                }
+            }
+
+            if(indexOfB16 == clickedIndex - 1 || indexOfB16 == clickedIndex + 1
+            || indexOfB16 == clickedIndex + 4 || indexOfB16 == clickedIndex - 4) {
+                b16 = buttonList.get(indexOfB16);
+                b16.setText(button.getText());
+                button.setText("");
+                b16.setOpaque(true);
+                b16.setContentAreaFilled(true);
+                b16.setBorderPainted(true);
+                button.setOpaque(false);
+                button.setContentAreaFilled(false);
+                button.setBorderPainted(false);
+            }
+        }
     }
 
 
