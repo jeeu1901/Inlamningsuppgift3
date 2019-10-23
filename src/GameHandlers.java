@@ -8,4 +8,16 @@ public class GameHandlers {
         Collections.shuffle(buttons);
         return buttons;
     }
+
+    public boolean checkWinner(List<JButton> buttons, List<JButton> winList) {
+
+        for(int i = 0; i < 15; i++) {
+            String number = buttons.get(i).getText();
+            if(!number.equals(winList.get(i))) {
+                return false;
+            }
+        }
+        return true;
+
+    }
 }
