@@ -49,8 +49,6 @@ public class CreateGame {
         gameButtons.setLayout(new GridLayout(4, 4));
         addButtons();
 
-
-
         //Handlers
         newGame.addActionListener(l -> {
             addButtons();
@@ -85,6 +83,10 @@ public class CreateGame {
             j.addActionListener(new myButtonListern());
             gameButtons.add(j);
         }
+        if(!gh.solvable(buttonList)) {
+            addButtons();
+        }
+
 
     }
 
