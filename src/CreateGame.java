@@ -47,6 +47,9 @@ public class CreateGame {
         gameButtons.setLayout(new GridLayout(4, 4));
 
         addButtons();
+        b16.setOpaque(false);
+        b16.setContentAreaFilled(false);
+        b16.setBorderPainted(false);
 
         //Handlers
         newGame.addActionListener(l -> {
@@ -73,9 +76,6 @@ public class CreateGame {
 
         //Osynlig knapp som ej kan klickas.
    //     gameButtons.add(b16);
-        b16.setOpaque(false);
-        b16.setContentAreaFilled(false);
-        b16.setBorderPainted(false);
         gamePanel.add(newGame);gamePanel.add(quitGame);
 
     }
