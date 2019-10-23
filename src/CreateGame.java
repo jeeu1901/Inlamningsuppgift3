@@ -64,9 +64,12 @@ public class CreateGame {
 
     public void addButtons() {
         gh.randomGame(buttonList);
+        //Lägger till alla knappar
         for(JButton j: buttonList) {
             gameButtons.add(j);
         }
+
+        //Osynlig knapp som ej kan klickas.
         gameButtons.add(b16);
         b16.setOpaque(false);
         b16.setContentAreaFilled(false);
