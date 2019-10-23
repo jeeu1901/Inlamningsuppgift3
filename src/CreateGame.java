@@ -71,15 +71,10 @@ public class CreateGame {
             j.setBorderPainted(true);
             gamePanel.add(newGame);gamePanel.add(quitGame);
             if(j.getText().equals("")) {
-                j.setText(buttonList.get(15).getText());
-            }
-            if(j == buttonList.get(15)) {
-                j.setText("");
                 j.setOpaque(false);
                 j.setContentAreaFilled(false);
                 j.setBorderPainted(false);
             }
-
             j.addActionListener(new myButtonListern());
             gameButtons.add(j);
         }
