@@ -82,6 +82,8 @@ public class CreateGame {
             addButtons();
         }
 
+        System.out.println("Jag är en katt");
+
 
     }
 
