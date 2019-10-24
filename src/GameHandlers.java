@@ -66,5 +66,9 @@ public class GameHandlers {
         return false;
     }
 
+    public void WinnerMessage(int clicks, JFrame winFrame) {
+
+    }
+
 
 }

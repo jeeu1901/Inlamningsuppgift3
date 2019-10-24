@@ -9,9 +9,12 @@ import java.util.List;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class CreateGame {
+    JFrame winFrame = new JFrame();
     JFrame gameBoard = new JFrame();
     JPanel gameButtons = new JPanel();
     JPanel gamePanel = new JPanel();
+    JPanel winPanel = new JPanel();
+    JLabel winText = new JLabel("Grattis till vinsten!");
     JButton newGame = new JButton("Nytt spel");
     JButton quitGame = new JButton("Avsluta spelet");
     JButton b1 = new JButton("1");
@@ -35,7 +38,7 @@ public class CreateGame {
     GameHandlers gh = new GameHandlers();
 
     CreateGame() {
-        //Design
+        //Design huvudspel
         gameBoard.setLayout(new BorderLayout());
         gameBoard.setSize(1000, 1000);
         gameBoard.setTitle("15-spel");
@@ -46,6 +49,15 @@ public class CreateGame {
         gameBoard.add("Center", gameButtons);
         gameButtons.setLayout(new GridLayout(4, 4));
         addButtons();
+
+        //Design vinst rutan
+        winFrame.setLayout(new BorderLayout());
+        winFrame.add("Center", winText);
+        winFrame.add("South", winPanel);
+        winPanel.setLayout(new FlowLayout());
+        winPanel.add(newGame);winPanel.add(quitGame);
+        winFrame.pack();
+        winFrame.setLocationRelativeTo(gameBoard);
 
         //Lambda handlers
         newGame.addActionListener(l -> {
