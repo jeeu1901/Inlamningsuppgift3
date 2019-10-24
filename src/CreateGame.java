@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -111,21 +110,9 @@ public class CreateGame {
                 transpButton.setOpaque(true);
                 transpButton.setContentAreaFilled(true);
                 transpButton.setBorderPainted(true);
-
-                // Lägger till kattbild.
-
-
                 button.setOpaque(false);
                 button.setContentAreaFilled(false);
                 button.setBorderPainted(false);
-               try {
-                    Image img = ImageIO.read(getClass().getResource("Cat.jpg"));
-                    button.setIcon(new ImageIcon(img));
-                }
-                catch (IOException ex) {
-                    System.out.println("erorr");
-                }
-
             }
 
             if(!gh.checkWinner(buttonList, winList)) {
