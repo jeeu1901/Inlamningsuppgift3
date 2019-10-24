@@ -3,6 +3,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,6 +34,7 @@ public class CreateGame {
     JButton b15 = new JButton("15");
     JButton b16 = new JButton("");
     List<JButton> buttonList = Arrays.asList(b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16);
+    List<String> winList = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "");
     GameHandlers gh = new GameHandlers();
 
     CreateGame() {
@@ -46,8 +49,6 @@ public class CreateGame {
         gameBoard.add("Center", gameButtons);
         gameButtons.setLayout(new GridLayout(4, 4));
         addButtons();
-
-
 
         //Handlers
         newGame.addActionListener(l -> {
@@ -71,18 +72,17 @@ public class CreateGame {
             j.setBorderPainted(true);
             gamePanel.add(newGame);gamePanel.add(quitGame);
             if(j.getText().equals("")) {
-                j.setText(buttonList.get(15).getText());
-            }
-            if(j == buttonList.get(15)) {
-                j.setText("");
                 j.setOpaque(false);
                 j.setContentAreaFilled(false);
                 j.setBorderPainted(false);
             }
-
             j.addActionListener(new myButtonListern());
             gameButtons.add(j);
         }
+        if(!gh.solvable(buttonList)) {
+            addButtons();
+        }
+
 
     }
 
@@ -111,10 +111,30 @@ public class CreateGame {
                 transpButton.setOpaque(true);
                 transpButton.setContentAreaFilled(true);
                 transpButton.setBorderPainted(true);
+
+                // Lägger till kattbild.
+
+
                 button.setOpaque(false);
                 button.setContentAreaFilled(false);
                 button.setBorderPainted(false);
+               try {
+                    Image img = ImageIO.read(getClass().getResource("Cat.jpg"));
+                    button.setIcon(new ImageIcon(img));
+                }
+                catch (IOException ex) {
+                    System.out.println("erorr");
+                }
+
             }
+
+            if(!gh.checkWinner(buttonList, winList)) {
+                System.out.println("u lost");
+            }
+            else if(gh.checkWinner(buttonList, winList)) {
+                System.out.println("u mega won");
+            }
+
         }
     }
 
