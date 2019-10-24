@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+
 public class Bricks extends JFrame{
     JFrame f=new JFrame();
     JPanel p=new JPanel();
