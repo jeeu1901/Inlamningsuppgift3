@@ -19,6 +19,7 @@ public class Bricks extends JFrame{
     int Rows=4;
     int Cols=4;
 
+
     Bricks() throws IOException{
         f.setLayout(new BorderLayout());
         p.setLayout(new GridLayout(Rows,Cols));
