@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,22 +37,29 @@ public class GameHandlers {
     }
 
     public boolean solvable(List<JButton> bricks) {
-
         int inversions = 0;
         int position = -1;
         int tempNr1, tempNr2;
 
-        //Räkna ut inversions d.v.s. Nummer till höger om ett tal som är mindre.
         for(int i = 0; i < bricks.size(); i++) {
             if(bricks.get(i).getText().equals("")) {
-                bricks.get(i).setText("0");
+                position = i+1;
             }
-            tempNr1 = Integer.parseInt(bricks.get(i).getText());
-            for(int j = i+1; j < bricks.size(); j++) {
-                if(bricks.get(j).getText().equals("")) {
-                    bricks.get(j).setText("0");
-                }
-                tempNr2 = Integer.parseInt(bricks.get(j).getText());
+        }
+
+
+        List<JButton> copy = new ArrayList<>();
+        for(JButton j: bricks) {
+            if(!j.getText().equals("")) {
+                copy.add(j);
+            }
+        }
+
+        //Räkna ut inversions d.v.s. Nummer till höger om ett tal som är mindre.
+        for(int i = 0; i < copy.size()-1; i++) {
+            tempNr1 = Integer.parseInt(copy.get(i).getText());
+            for(int j = i+1; j < copy.size(); j++) {
+                tempNr2 = Integer.parseInt(copy.get(j).getText());
                 if(tempNr2 > tempNr1) {
                     inversions++;
                 }
@@ -57,35 +67,32 @@ public class GameHandlers {
         }
         // Tar ut blanka positionen och sätter tbx blankt istället för 0a.
         // Ändrade till 0 för att förhindra parse error (NumberForma..)
-        for(int i = 0; i < bricks.size(); i++) {
-            if(bricks.get(i).getText().equals("0")) {
-                position = i+1;
-                bricks.get(i).setText("");
-            }
-        }
-        System.out.println(inversions);
-        if (position <= 4 || position >= 9 && position <= 12) {
+
+        System.out.println(inversions + " " + position + " ");
+      /*  if (position <= 4 || position >= 9 && position <= 12) {
             if(inversions % 2 == 0) {
-                System.out.println("Unsolvable");
+                System.out.println("Unsolvable - Creating new puzzle" );
                 return false;
             }
             else {
-                System.out.println("Solvable");
+                System.out.println("Solvable" + "even");
                 return true;
             }
-        } else {
+        } else if(position >=5 && position <=8 ||position >= 13 ){
             if(inversions % 2 == 1) {
-                System.out.println("Unsolvable");
+                System.out.println("Unsolvable - Creating new puzzlee");
                 return false;
             }
             else {
-                System.out.println("Solvable");
+                System.out.println("Solvable" + " odd");
                 return true;
             }
+        } */
+        if(inversions % 2 == 0) {
+            return true;
         }
-
-
-
+        else
+            return false;
     }
 
     public void playAble(List<JButton> bricks, JButton button) {
@@ -108,27 +115,5 @@ public class GameHandlers {
         }
 
     }
-
-    public void WinnerMessage(JFrame game) {
-        JFrame winFrame = new JFrame();
-        JButton newGame = new JButton("Try Again");
-        JButton quitGame = new JButton("Quit");
-        JLabel winText = new JLabel("Wow, you won!" + "\nYou won with " + "<--Ska lägga in counter-->" + "moves");
-        JPanel winPanel = new JPanel();
-
-        winFrame.setLayout(new BorderLayout());
-        winFrame.add("Center", winText);
-        winFrame.add("South", winPanel);
-        winPanel.setLayout(new FlowLayout());
-        winPanel.add(newGame);winPanel.add(quitGame);
-        winFrame.setLocationRelativeTo(game);
-        winFrame.pack();
-
-        newGame.addActionListener(l -> {
-            CreateGame startNewGame = new CreateGame();
-        });
-
-    }
-
 
 }
