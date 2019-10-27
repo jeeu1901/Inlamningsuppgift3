@@ -1,12 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
 public class GameHandlers {
+
+
 
     public void randomGame(List<JButton> bricks) {
         Collections.shuffle(bricks);
@@ -33,6 +33,27 @@ public class GameHandlers {
         }
         System.out.println("U wonnnnnnn");
         return true;
+
+    }
+
+    public void playAble(List<JButton> bricks, JButton button) {
+        int transp = Integer.MIN_VALUE, clicked = Integer.MIN_VALUE;
+        for(int i = 0; i < bricks.size(); i++) {
+            if (bricks.get(i).getText().equals(button.getText())) {
+                clicked = i;
+            }
+            else if (bricks.get(i).getText().equals("")){
+                transp = i;
+            }
+        }
+        if(transp == clicked - 1 || transp == clicked + 1
+                || transp == clicked + 4 || transp == clicked - 4) {
+            JButton transpButton = bricks.get(transp);
+            transpButton.setText(button.getText());
+            button.setText("");
+            transpButton.setIcon(null);
+            addCat(button);
+        }
 
     }
 
@@ -94,26 +115,5 @@ public class GameHandlers {
         else
             return false;
     }*/
-
-    public void playAble(List<JButton> bricks, JButton button) {
-        int transp = Integer.MIN_VALUE, clicked = Integer.MIN_VALUE;
-        for(int i = 0; i < bricks.size(); i++) {
-            if (bricks.get(i).getText().equals(button.getText())) {
-                clicked = i;
-            }
-            else if (bricks.get(i).getText().equals("")){
-                transp = i;
-            }
-        }
-        if(transp == clicked - 1 || transp == clicked + 1
-                || transp == clicked + 4 || transp == clicked - 4) {
-            JButton transpButton = bricks.get(transp);
-            transpButton.setText(button.getText());
-            button.setText("");
-            transpButton.setIcon(null);
-            addCat(button);
-        }
-
-    }
 
 }
