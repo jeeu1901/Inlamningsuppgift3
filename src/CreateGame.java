@@ -63,12 +63,12 @@ public class CreateGame {
         for (int i=0;i<bricks.size();i++){
             p.add(bricks.get(i));
         }
-
-
+        //Urfunktion just nu.
+        /*
         if(!gh.solvable(bricks)) {
             addButtons();
             f.revalidate();
-        }
+        } */
     }
 
     class myButtonListern implements ActionListener {
@@ -76,6 +76,7 @@ public class CreateGame {
         @Override
         public void actionPerformed(ActionEvent e) {
             JButton button = (JButton) e.getSource();
+
             gh.playAble(bricks, button);
 
             if(gh.checkWinner(bricks, winList)) {

@@ -36,7 +36,7 @@ public class GameHandlers {
 
     }
 
-    public boolean solvable(List<JButton> bricks) {
+    /*public boolean solvable(List<JButton> bricks) {
         int inversions = 0;
         int position = -1;
         int tempNr1, tempNr2;
@@ -69,7 +69,7 @@ public class GameHandlers {
         // Ändrade till 0 för att förhindra parse error (NumberForma..)
 
         System.out.println(inversions + " " + position + " ");
-      /*  if (position <= 4 || position >= 9 && position <= 12) {
+      *//*  if (position <= 4 || position >= 9 && position <= 12) {
             if(inversions % 2 == 0) {
                 System.out.println("Unsolvable - Creating new puzzle" );
                 return false;
@@ -87,13 +87,13 @@ public class GameHandlers {
                 System.out.println("Solvable" + " odd");
                 return true;
             }
-        } */
+        } *//*
         if(inversions % 2 == 0) {
             return true;
         }
         else
             return false;
-    }
+    }*/
 
     public void playAble(List<JButton> bricks, JButton button) {
         int transp = Integer.MIN_VALUE, clicked = Integer.MIN_VALUE;
