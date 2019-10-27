@@ -1,18 +1,12 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-
 
 public class CreateGame {
     JFrame f=new JFrame();
@@ -23,20 +17,15 @@ public class CreateGame {
     JLabel count=new JLabel("Clicks: ");
     JButton newGame = new JButton("New Game");
     JButton quitGame = new JButton("Quit Game");
-    List<JButton>bricks=new ArrayList<JButton>();
-    List<String> winList = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "");
-    int Rows=4;
-    int Cols=4;
+    List<JButton>bricks = new ArrayList<JButton>();
+    List<String> winList = new ArrayList<>();
     int startCounter = 1;
     GameHandlers gh = new GameHandlers();
     Timer ur;
 
-
-
-
-    CreateGame() {
+    CreateGame(int rows, int cols) {
         f.setLayout(new BorderLayout());
-        p.setLayout(new GridLayout(Rows,Cols));
+        p.setLayout(new GridLayout(rows,cols));
         f.setTitle("Best Game Ever");
         f.setDefaultCloseOperation(EXIT_ON_CLOSE);
         f.setSize(1200, 1100);
@@ -45,10 +34,8 @@ public class CreateGame {
         op.add(newGame);op.add(quitGame);
         f.setLocationRelativeTo(null);
 
-
-
-
-        for (int i=0;i<(Rows*Cols);i++) {
+        for (int i=0;i<(rows*cols);i++) {
+            winList.add(String.valueOf(i+1));
             bricks.add(new JButton(String.valueOf(i+1)));
             bricks.get(i).setForeground(Color.PINK);
             bricks.get(i).setFont(new Font("SansSerif", Font.BOLD,40));
@@ -58,10 +45,9 @@ public class CreateGame {
             bricks.get(i).setHorizontalTextPosition(JButton.CENTER);
             bricks.get(i).setVerticalTextPosition(JButton.CENTER);
             bricks.get(i).addActionListener(new myButtonListern());
-
         }
-        bricks.get(15).setText("");
-        gh.addCat(bricks.get(15));
+        bricks.get(bricks.size()-1).setText("");
+        gh.addCat(bricks.get(bricks.size()-1));
         f.setVisible(true);
         addButtons();
 
