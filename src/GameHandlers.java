@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -56,8 +57,55 @@ public class GameHandlers {
 
     }
 
+/*
+( (grid width odd) && (#inversions even) )  ||  ( (grid width even) && ((blank on odd row from bottom) == (#inversions even)) ) */
+    public boolean solvable(List<JButton> bricks) {
+        ArrayList<JButton> copy = new ArrayList<>();
+        int inversions = 0;
+        int position = 0;
 
+        for(JButton j: bricks) {
+            position++;
+            if(!j.getText().equals("")) {
+                copy.add(j);
+            }
+        }
+        int row = 0;
+        for(int i = 0; i < bricks.size(); i++) {
+            if(bricks.get(i).getText().equals("")) {
+                position = i+1;
+                if(position >= 13 && position <= 16|| position >= 5 && position <= 8) {
+                    row = 1;
+                }
+                else if(position <= 4 && position > 0 || position >= 9 && position <= 13) {
+                    row = 2;
+                }
+            }
+        }
 
+        for(int i = 0; i < copy.size(); i++) {
+            for(int j = i + 1; j < copy.size(); j++) {
+                if(Integer.parseInt(copy.get(i).getText()) > Integer.parseInt(copy.get(j).getText())) {
+                    inversions++;
+                }
+            }
+        }
+
+        System.out.println("Inversions: " + inversions + "\nBlank pos = " + position);
+        if((inversions % 2 == 0) && row == 1) {
+            System.out.println("solvable row odd, even inv" + " with inversions: "+ inversions + " and blank pos: " + position);
+            return true;
+        }
+        else if((inversions % 2 == 1) && row == 2) {
+            System.out.println("solvable row even, odd inv" + " with inversions: "+ inversions + " and blank pos: " + position);
+            return true;
+        }
+        else {
+            System.out.println("Not solvable");
+            return false;
+        }
+
+    }
     /*public boolean solvable(List<JButton> bricks) {
         int inversions = 0;
         int position = -1;

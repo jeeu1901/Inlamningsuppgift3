@@ -19,11 +19,11 @@ public class CreateGame {
     JLabel count=new JLabel("Clicks: ");
     JButton newGame = new JButton("New Game");
     JButton quitGame = new JButton("Quit Game");
-    ArrayList<JButton>bricks=new ArrayList<JButton>();
+    List<JButton>bricks=new ArrayList<JButton>();
     List<String> winList = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "");
     int Rows=4;
     int Cols=4;
-    int startCounter = 0;
+    int startCounter = 1;
     GameHandlers gh = new GameHandlers();
     Timer ur;
 
@@ -59,6 +59,7 @@ public class CreateGame {
         // Start och Quit
         newGame.addActionListener(l -> {
             ur.stop();
+            startCounter = 1;
             addButtons();
             p.revalidate();
         });
@@ -78,16 +79,13 @@ public class CreateGame {
         for (int i=0;i<bricks.size();i++){
             p.add(bricks.get(i));
         }
-        startCounter = 0;
         timer();
 
 
-        //Urfunktion just nu.
-        /*
         if(!gh.solvable(bricks)) {
             addButtons();
             f.revalidate();
-        } */
+        }
     }
 
     class myButtonListern implements ActionListener {
@@ -110,8 +108,8 @@ public class CreateGame {
         JButton winNewGame = new JButton("Try Again");
         JButton winQuitGame = new JButton("Quit");
         JLabel winText = new JLabel("Wow, you won!", SwingConstants.CENTER);
-        JLabel winMoves = new JLabel("With"  + count.getText() + "moves", SwingConstants.CENTER);
-        JLabel winTimer = new JLabel("It took you " + clock.getText() + " to complete the game", SwingConstants.CENTER);
+        JLabel winMoves = new JLabel(count.getText(), SwingConstants.CENTER);
+        JLabel winTimer = new JLabel(clock.getText() , SwingConstants.CENTER);
         JPanel winPanel = new JPanel();
         JPanel winOutput = new JPanel();
 
@@ -129,6 +127,7 @@ public class CreateGame {
 
         winNewGame.addActionListener(l -> {
             winFrame.setVisible(false);
+            startCounter = 1;
             addButtons();
             f.revalidate();
         });
