@@ -7,7 +7,6 @@ import java.util.List;
 public class GameHandlers {
 
 
-
     public void randomGame(List<JButton> bricks) {
         Collections.shuffle(bricks);
     }
@@ -24,19 +23,15 @@ public class GameHandlers {
 
         for (int i = 0; i < 16; i++) {
             String number = buttons.get(i).getText();
-            System.out.println("buttons nr is = " + number);
-            System.out.println("winList nr is = " + winList.get(i));
-
             if (!number.equals(winList.get(i))) {
                 return false;
             }
         }
-        System.out.println("U wonnnnnnn");
         return true;
 
     }
 
-    public void playAble(List<JButton> bricks, JButton button) {
+    public boolean playAble(List<JButton> bricks, JButton button) {
         int transp = Integer.MIN_VALUE, clicked = Integer.MIN_VALUE;
         for(int i = 0; i < bricks.size(); i++) {
             if (bricks.get(i).getText().equals(button.getText())) {
@@ -53,9 +48,15 @@ public class GameHandlers {
             button.setText("");
             transpButton.setIcon(null);
             addCat(button);
+            return true;
+        }
+        else {
+            return false;
         }
 
     }
+
+
 
     /*public boolean solvable(List<JButton> bricks) {
         int inversions = 0;

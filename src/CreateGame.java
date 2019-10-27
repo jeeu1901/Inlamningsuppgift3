@@ -15,16 +15,18 @@ public class CreateGame {
     JPanel p=new JPanel();
     JPanel op=new JPanel();
     JPanel top=new JPanel();
-    JLabel clock=new JLabel("");
-    JLabel count=new JLabel();
+    JLabel clock=new JLabel("Timer: ");
+    JLabel count=new JLabel("Clicks: ");
     JButton newGame = new JButton("New Game");
     JButton quitGame = new JButton("Quit Game");
     ArrayList<JButton>bricks=new ArrayList<JButton>();
     List<String> winList = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "");
     int Rows=4;
     int Cols=4;
+    int startCounter = 0;
     GameHandlers gh = new GameHandlers();
     Timer ur;
+
 
 
     CreateGame() {
@@ -76,7 +78,7 @@ public class CreateGame {
         for (int i=0;i<bricks.size();i++){
             p.add(bricks.get(i));
         }
-
+        startCounter = 0;
         timer();
 
 
@@ -93,9 +95,9 @@ public class CreateGame {
         @Override
         public void actionPerformed(ActionEvent e) {
             JButton button = (JButton) e.getSource();
-
-            gh.playAble(bricks, button);
-
+            if(gh.playAble(bricks, button)) {
+                count.setText("Clicks: " + counter());
+            }
             if(gh.checkWinner(bricks, winList)) {
                 winnerMessage();
             }
@@ -108,7 +110,7 @@ public class CreateGame {
         JButton winNewGame = new JButton("Try Again");
         JButton winQuitGame = new JButton("Quit");
         JLabel winText = new JLabel("Wow, you won!", SwingConstants.CENTER);
-        JLabel winMoves = new JLabel("With \" + \"<--Ska lägga in counter-->\" + \"moves\"", SwingConstants.CENTER);
+        JLabel winMoves = new JLabel("With"  + count.getText() + "moves", SwingConstants.CENTER);
         JLabel winTimer = new JLabel("It took you " + clock.getText() + " to complete the game", SwingConstants.CENTER);
         JPanel winPanel = new JPanel();
         JPanel winOutput = new JPanel();
@@ -147,7 +149,9 @@ public class CreateGame {
             clock.repaint();
         });
         ur.start();
+    }
 
-
+    public int counter() {
+        return startCounter++;
     }
 }
