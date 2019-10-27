@@ -84,27 +84,6 @@ public class CreateGame {
         }
     }
 
-/*
-    class myMouseListern extends MouseAdapter {
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-            ((JButton) e.getSource()).setBackground(Color.PINK);
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-            ((JButton) e.getSource()).setBackground(Color.DARK_GRAY);
-
-        }
-        @Override
-        public void mousePressed(MouseEvent e) {
-            ((JButton) e.getSource()).setContentAreaFilled(false);
-            ((JButton) e.getSource()).setBackground(Color.DARK_GRAY);
-
-        }
-    } */
-
     class myButtonListern implements ActionListener {
 
         @Override
