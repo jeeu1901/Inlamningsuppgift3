@@ -4,7 +4,6 @@ import java.awt.event.*;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -21,11 +20,13 @@ public class CreateGame {
     List<String> winList = new ArrayList<>();
     int startCounter = 1;
     GameHandlers gh = new GameHandlers();
+    UserInput ui = new UserInput();
     Timer ur;
 
-    CreateGame(int rows, int cols) {
+    CreateGame() {
+        ui.getInput();
         f.setLayout(new BorderLayout());
-        p.setLayout(new GridLayout(rows,cols));
+        p.setLayout(new GridLayout(ui.getRow(),ui.getColInput()));
         f.setTitle("Best Game Ever");
         f.setDefaultCloseOperation(EXIT_ON_CLOSE);
         f.setSize(1200, 1100);
@@ -34,7 +35,7 @@ public class CreateGame {
         op.add(newGame);op.add(quitGame);
         f.setLocationRelativeTo(null);
 
-        for (int i=0;i<(rows*cols);i++) {
+        for (int i=0;i<(ui.getRow()*ui.getColInput());i++) {
             winList.add(String.valueOf(i+1));
             bricks.add(new JButton(String.valueOf(i+1)));
             bricks.get(i).setForeground(Color.PINK);
@@ -109,7 +110,7 @@ public class CreateGame {
         @Override
         public void actionPerformed(ActionEvent e) {
             JButton button = (JButton) e.getSource();
-            if(gh.playAble(bricks, button)) {
+            if(gh.playAble(bricks, button, ui.getColInput())) {
                 count.setText("Clicks: " + counter());
             }
             if(gh.checkWinner(bricks, winList)) {
@@ -169,4 +170,5 @@ public class CreateGame {
     public int counter() {
         return startCounter++;
     }
+
 }

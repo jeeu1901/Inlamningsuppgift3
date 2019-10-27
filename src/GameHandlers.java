@@ -6,6 +6,7 @@ import java.util.List;
 
 
 public class GameHandlers {
+    UserInput u = new UserInput();
 
 
     public void randomGame(List<JButton> bricks) {
@@ -42,7 +43,7 @@ public class GameHandlers {
 
     }
 
-    public boolean playAble(List<JButton> bricks, JButton button) {
+    public boolean playAble(List<JButton> bricks, JButton button, int rowCol) {
         int transp = Integer.MIN_VALUE, clicked = Integer.MIN_VALUE;
         for(int i = 0; i < bricks.size(); i++) {
             if (bricks.get(i).getText().equals(button.getText())) {
@@ -52,8 +53,9 @@ public class GameHandlers {
                 transp = i;
             }
         }
+        System.out.println(rowCol);
         if(transp == clicked - 1 || transp == clicked + 1
-                || transp == clicked + 4 || transp == clicked - 4) {
+                || transp == clicked + rowCol || transp == clicked - rowCol) {
             JButton transpButton = bricks.get(transp);
             transpButton.setText(button.getText());
             button.setText("");
