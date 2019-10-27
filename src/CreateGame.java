@@ -21,9 +21,11 @@ public class CreateGame {
     int startCounter = 1;
     GameHandlers gh = new GameHandlers();
     UserInput ui = new UserInput();
+    FileHandler fh = new FileHandler();
     Timer ur;
 
     CreateGame() {
+        fh.readFile();
         ui.getInput();
         f.setLayout(new BorderLayout());
         p.setLayout(new GridLayout(ui.getRow(),ui.getColInput()));
@@ -120,6 +122,7 @@ public class CreateGame {
         winFrame.setLocationRelativeTo(f);
         winFrame.pack();
         winFrame.setVisible(true);
+        fh.writeFile(winMoves, winTimer);
 
         winNewGame.addActionListener(l -> {
             winFrame.setVisible(false);
