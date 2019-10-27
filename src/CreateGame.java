@@ -78,7 +78,7 @@ public class CreateGame {
         timer();
 
 
-        if(!gh.solvable(bricks)) {
+        if(!gh.solvable(bricks, ui.getRow(), ui.getColInput())) {
             addButtons();
             f.revalidate();
         }
@@ -155,6 +155,9 @@ public class CreateGame {
 
     }
 
+    /**
+     * Startar en klocka, output för varje sekund.
+     */
     public void timer() {
         Instant startTime = Instant.now();
         ur = new Timer(1000, e -> {
