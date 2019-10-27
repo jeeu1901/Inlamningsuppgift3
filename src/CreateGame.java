@@ -1,7 +1,11 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -29,12 +33,13 @@ public class CreateGame {
 
 
 
+
     CreateGame() {
         f.setLayout(new BorderLayout());
         p.setLayout(new GridLayout(Rows,Cols));
         f.setTitle("Best Game Ever");
         f.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        f.setSize(1000, 1000);
+        f.setSize(1200, 1100);
         f.add("South",op);f.add("Center",p);f.add("North", top);
         top.add(clock);top.add(count);
         op.add(newGame);op.add(quitGame);
@@ -43,11 +48,15 @@ public class CreateGame {
 
 
 
-
         for (int i=0;i<(Rows*Cols);i++) {
             bricks.add(new JButton(String.valueOf(i+1)));
-            bricks.get(i).setBackground(Color.LIGHT_GRAY);
-            bricks.get(i).setFont(new Font("Arial", Font.PLAIN,40));
+            bricks.get(i).setForeground(Color.PINK);
+            bricks.get(i).setFont(new Font("SansSerif", Font.BOLD,40));
+            gh.addPaws(bricks.get(i));
+            bricks.get(i).setBorder(BorderFactory.createLineBorder(Color.pink));
+            bricks.get(i).setBorderPainted(true);
+            bricks.get(i).setHorizontalTextPosition(JButton.CENTER);
+            bricks.get(i).setVerticalTextPosition(JButton.CENTER);
             bricks.get(i).addActionListener(new myButtonListern());
 
         }
@@ -87,6 +96,27 @@ public class CreateGame {
             f.revalidate();
         }
     }
+
+/*
+    class myMouseListern extends MouseAdapter {
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            ((JButton) e.getSource()).setBackground(Color.PINK);
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            ((JButton) e.getSource()).setBackground(Color.DARK_GRAY);
+
+        }
+        @Override
+        public void mousePressed(MouseEvent e) {
+            ((JButton) e.getSource()).setContentAreaFilled(false);
+            ((JButton) e.getSource()).setBackground(Color.DARK_GRAY);
+
+        }
+    } */
 
     class myButtonListern implements ActionListener {
 

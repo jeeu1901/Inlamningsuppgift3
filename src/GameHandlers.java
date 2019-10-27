@@ -15,9 +15,17 @@ public class GameHandlers {
     public void addCat(JButton j) {
         ImageIcon icon = new ImageIcon("src/Images/Cat.jpg");
         Image image = icon.getImage();
-        image = image.getScaledInstance(430, 265, Image.SCALE_SMOOTH);
+        image = image.getScaledInstance(500, 400, Image.SCALE_SMOOTH);
         icon = new ImageIcon(image);
         j.setIcon(icon);
+    }
+
+    public void addPaws(JButton j) {
+        ImageIcon paws = new ImageIcon("src/Images/paws4.jpg");
+        Image img = paws.getImage();
+        Image newimg = img.getScaledInstance( 700, 490,  Image.SCALE_SMOOTH );
+        paws = new ImageIcon(newimg);
+        j.setIcon(paws);
     }
 
     public boolean checkWinner(List<JButton> buttons, List<String> winList) {
@@ -48,6 +56,7 @@ public class GameHandlers {
             transpButton.setText(button.getText());
             button.setText("");
             transpButton.setIcon(null);
+            addPaws(transpButton);
             addCat(button);
             return true;
         }
