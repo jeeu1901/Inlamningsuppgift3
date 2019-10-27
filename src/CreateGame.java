@@ -16,6 +16,7 @@ public class CreateGame {
     JLabel count=new JLabel("Clicks: ");
     JButton newGame = new JButton("New Game");
     JButton quitGame = new JButton("Quit Game");
+    JButton recordGame = new JButton("Records");
     List<JButton>bricks = new ArrayList<JButton>();
     List<String> winList = new ArrayList<>();
     int startCounter = 1;
@@ -25,16 +26,20 @@ public class CreateGame {
     Timer ur;
 
     CreateGame() {
-        fh.readFile();
         ui.getInput();
         f.setLayout(new BorderLayout());
         p.setLayout(new GridLayout(ui.getRow(),ui.getColInput()));
         f.setTitle("Best Game Ever");
         f.setDefaultCloseOperation(EXIT_ON_CLOSE);
         f.setSize(1200, 1100);
-        f.add("South",op);f.add("Center",p);f.add("North", top);
-        top.add(clock);top.add(count);
-        op.add(newGame);op.add(quitGame);
+        f.add("South",op);
+        f.add("Center",p);
+        f.add("North", top);
+        top.add(clock);
+        top.add(count);
+        op.add(newGame);
+        op.add(recordGame);
+        op.add(quitGame);
         f.setLocationRelativeTo(null);
 
         for (int i=0;i<(ui.getRow()*ui.getColInput());i++) {
@@ -65,6 +70,10 @@ public class CreateGame {
             System.out.println("Avslutas");
             ur.stop();
             System.exit(0);
+        });
+        recordGame.addActionListener(l -> {
+            fh.readFile();
+            recordFrame();
         });
 
     }
@@ -116,8 +125,11 @@ public class CreateGame {
         winFrame.add("South", winPanel);
         winOutput.setLayout(new GridLayout(3, 1));
         winPanel.setLayout(new FlowLayout());
-        winPanel.add(winNewGame);winPanel.add(winQuitGame);
-        winOutput.add(winText);winOutput.add(winMoves);winOutput.add(winTimer);
+        winPanel.add(winNewGame);
+        winPanel.add(winQuitGame);
+        winOutput.add(winText);
+        winOutput.add(winMoves);
+        winOutput.add(winTimer);
 
         winFrame.setLocationRelativeTo(f);
         winFrame.pack();
@@ -134,7 +146,28 @@ public class CreateGame {
             System.out.println("Spelet avslutas");
             System.exit(0);
         });
+    }
 
+    public void recordFrame() {
+        JPanel recordPanel = new JPanel();
+        JLabel times = new JLabel("");
+        JLabel clicks = new JLabel("");
+        recordPanel.setLayout(new BorderLayout());
+        recordPanel.add("East", times);
+        recordPanel.add("West", clicks);
+        String tempClicks = "";
+        for(int i = 0; i < fh.getClickRecord().size(); i++) {
+            tempClicks += fh.getClickRecord().get(i) + "\n";
+
+        }
+        clicks.setText(tempClicks);
+        String tempTime = "";
+        for(int i = 0; i < fh.getTimeRecord().size(); i++) {
+            tempTime += fh.getTimeRecord().get(i) + "\n";
+
+        }
+        times.setText(tempTime);
+        JOptionPane.showMessageDialog(null, recordPanel);
     }
 
     /**
