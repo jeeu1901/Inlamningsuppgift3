@@ -18,7 +18,7 @@ public class UserInput {
         while (!inputCheck) {
             try {
                 int result = JOptionPane.showConfirmDialog(null, myPanel,
-                        "Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
+                        "Vänligen ange rad och kolumner värden", JOptionPane.OK_CANCEL_OPTION);
                 if (result == JOptionPane.OK_OPTION) {
                     rowInput = Integer.parseInt(rows.getText().trim());
                     colInput = Integer.parseInt(cols.getText().trim());
