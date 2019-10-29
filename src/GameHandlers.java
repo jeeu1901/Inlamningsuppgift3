@@ -48,8 +48,8 @@ class GameHandlers {
 
         for (int i = 0; i < winList.size() - 1; i++) {
             String number = buttons.get(i).getText();
-            System.out.println("Winlist: " + winList.get(i));
-            System.out.println("ButtonList: " + number);
+           // System.out.println("Winlist: " + winList.get(i));
+           // System.out.println("ButtonList: " + number);
             if (!number.equals(winList.get(i))) {
                 return false;
             }
