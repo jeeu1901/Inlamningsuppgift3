@@ -3,7 +3,7 @@ import javax.swing.*;
 public class UserInput {
     private int rowInput, colInput;
     UserInput(){}
-    public void getInput()
+    protected void getInput()
     {
         JTextField rows = new JTextField(5);
         JTextField cols = new JTextField(5);
@@ -38,19 +38,19 @@ public class UserInput {
 
     }
 
-    private void setRow(int row) {
+    protected void setRow(int row) {
         this.rowInput = row;
     }
 
-    public int getRow() {
+    protected int getRow() {
         return rowInput;
     }
 
-    public int getColInput() {
+    protected int getColInput() {
         return colInput;
     }
 
-    public void setColInput(int col) {
+    protected void setColInput(int col) {
         this.colInput = col;
     }
 }

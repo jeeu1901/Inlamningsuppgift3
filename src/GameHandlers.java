@@ -5,11 +5,11 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class GameHandlers {
+class GameHandlers {
     UserInput u = new UserInput();
 
 
-    public void randomGame(List<JButton> bricks) {
+    protected void randomGame(List<JButton> bricks) {
         Collections.shuffle(bricks);
     }
 
@@ -17,7 +17,7 @@ public class GameHandlers {
      * Byter bild på knapp till en katt.
      * @param j JButton
      */
-    public void addCat(JButton j) {
+    protected void addCat(JButton j) {
         ImageIcon icon = new ImageIcon("src/Images/Cat.jpg");
         Image image = icon.getImage();
         image = image.getScaledInstance(500, 400, Image.SCALE_SMOOTH);
@@ -29,7 +29,7 @@ public class GameHandlers {
      * Byter bild till "paws"
      * @param j JButton
      */
-    public void addPaws(JButton j) {
+    protected void addPaws(JButton j) {
         ImageIcon paws = new ImageIcon("src/Images/paws4.jpg");
         Image img = paws.getImage();
         Image newimg = img.getScaledInstance(700, 490, Image.SCALE_SMOOTH);
@@ -44,7 +44,7 @@ public class GameHandlers {
      * @param winList
      * @return bool
      */
-    public boolean checkWinner(List<JButton> buttons, List<String> winList) {
+   protected boolean checkWinner(List<JButton> buttons, List<String> winList) {
 
         for (int i = 0; i < winList.size() - 1; i++) {
             String number = buttons.get(i).getText();
@@ -66,7 +66,7 @@ public class GameHandlers {
      * @param rowCol
      * @return bool
      */
-    public boolean playAble(List<JButton> bricks, JButton button, int rowCol) {
+   protected boolean playAble(List<JButton> bricks, JButton button, int rowCol) {
         int transp = Integer.MIN_VALUE, clicked = Integer.MIN_VALUE;
         // Tar ut den klickade knappen & den blanka knappen
         for (int i = 0; i < bricks.size(); i++) {
@@ -98,7 +98,7 @@ public class GameHandlers {
      * @param colInput
      * @return bool
      */
-    public boolean solvable(List<JButton> bricks, int rowInput, int colInput) {
+    protected boolean solvable(List<JButton> bricks, int rowInput, int colInput) {
         ArrayList<JButton> copy = new ArrayList<>();
         int inversions = 0;
         int position = 0;

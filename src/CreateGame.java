@@ -7,21 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class CreateGame {
-    JFrame f=new JFrame();
-    JPanel p=new JPanel();
-    JPanel op=new JPanel();
-    JPanel top=new JPanel();
-    JLabel clock=new JLabel("Timer: ");
-    JLabel count=new JLabel("Clicks: ");
-    JButton newGame = new JButton("New Game");
-    JButton quitGame = new JButton("Quit Game");
-    List<JButton>bricks = new ArrayList<JButton>();
-    List<String> winList = new ArrayList<>();
-    int startCounter = 1;
-    GameHandlers gh = new GameHandlers();
-    UserInput ui = new UserInput();
-    Timer ur;
+class CreateGame {
+    private JFrame f=new JFrame();
+    private JPanel p=new JPanel();
+    private JPanel op=new JPanel();
+    private JPanel top=new JPanel();
+    private JLabel clock=new JLabel("Timer: ");
+    private JLabel count=new JLabel("Clicks: ");
+    private JButton newGame = new JButton("New Game");
+    private JButton quitGame = new JButton("Quit Game");
+    private List<JButton>bricks = new ArrayList<JButton>();
+    private List<String> winList = new ArrayList<>();
+    private int startCounter = 1;
+    private GameHandlers gh = new GameHandlers();
+    private UserInput ui = new UserInput();
+    private Timer ur;
 
     CreateGame() {
         ui.getInput();
@@ -67,7 +67,7 @@ public class CreateGame {
 
     }
 
-    public void addButtons() {
+    private void addButtons() {
 
         //Anropar metod för att shuffla brickorna
 
@@ -98,7 +98,7 @@ public class CreateGame {
         }
     }
 
-    public void winnerMessage() {
+    private void winnerMessage() {
         ur.stop();
         JFrame winFrame = new JFrame();
         JButton winNewGame = new JButton("Try Again");
@@ -137,7 +137,7 @@ public class CreateGame {
     /**
      * Startar en klocka, output för varje sekund.
      */
-    public void timer() {
+    private void timer() {
         Instant startTime = Instant.now();
         ur = new Timer(1000, e -> {
             Instant now = Instant.now();
@@ -149,7 +149,7 @@ public class CreateGame {
         ur.start();
     }
 
-    public int counter() {
+    private int counter() {
         return startCounter++;
     }
 
